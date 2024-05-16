@@ -13,11 +13,11 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import ru.yandex.practicum.moviessearch.core.navigation.Router
+import ru.yandex.practicum.moviessearch.R
 import ru.yandex.practicum.moviessearch.databinding.FragmentMoviesBinding
 import ru.yandex.practicum.moviessearch.domain.models.Movie
 import ru.yandex.practicum.moviessearch.presentation.movies.MoviesState
@@ -32,19 +32,12 @@ class MoviesFragment : Fragment() {
 
     private val viewModel by viewModel<MoviesViewModel>()
 
-    private val router: Router by inject()
-
     private val adapter = MoviesAdapter { movie ->
         if (clickDebounce()) {
-
-            // Переходим на следующий экран с помощью Router
-            router.openFragment(
-                DetailsFragment.newInstance(
-                    movieId = movie.id,
-                    posterUrl = movie.image
-                )
+            findNavController().navigate(
+                R.id.action_moviesFragment_to_detailsFragment,
+                DetailsFragment.createArgs(movie.id, movie.image)
             )
-
         }
     }
 
@@ -60,7 +53,11 @@ class MoviesFragment : Fragment() {
 
     private val handler = Handler(Looper.getMainLooper())
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         binding = FragmentMoviesBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -74,7 +71,8 @@ class MoviesFragment : Fragment() {
         progressBar = binding.progressBar
 
         // Здесь пришлось поправить использование Context
-        moviesList.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        moviesList.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         moviesList.adapter = adapter
 
         textWatcher = object : TextWatcher {

@@ -9,12 +9,16 @@ import ru.yandex.practicum.moviessearch.data.dto.MoviesSearchResponse
 
 interface IMDbApiService {
 
-    @GET("/en/API/SearchMovie/YOUR_API_KEY/{expression}")
+    companion object {
+        private const val IMDB_KEY = "k_zcuw1ytf"
+    }
+
+    @GET("/en/API/SearchMovie/$IMDB_KEY/{expression}")
     fun searchMovies(@Path("expression") expression: String): Call<MoviesSearchResponse>
 
-    @GET("/en/API/Title/YOUR_API_KEY/{movie_id}")
+    @GET("/en/API/Title/$IMDB_KEY/{movie_id}")
     fun getMovieDetails(@Path("movie_id") movieId: String): Call<MovieDetailsResponse>
 
-    @GET("/en/API/FullCast/YOUR_API_KEY/{movie_id}")
+    @GET("/en/API/FullCast/$IMDB_KEY/{movie_id}")
     fun getFullCast(@Path("movie_id") movieId: String): Call<MovieCastResponse>
 }
