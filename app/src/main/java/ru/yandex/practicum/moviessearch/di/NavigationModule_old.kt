@@ -1,8 +1,8 @@
 package ru.yandex.practicum.moviessearch.di
 
 import org.koin.dsl.module
-import ru.yandex.practicum.moviessearch.core.navigation.Router
-import ru.yandex.practicum.moviessearch.core.navigation.RouterImpl
+import ru.yandex.practicum.moviessearch.core.navigation_old.Router
+import ru.yandex.practicum.moviessearch.core.navigation_old.RouterImpl
 
 
 val navigationModule = module {

@@ -1,4 +1,4 @@
-package ru.yandex.practicum.moviessearch.core.navigation
+package ru.yandex.practicum.moviessearch.core.navigation_old
 
 import androidx.annotation.IdRes
 import androidx.fragment.app.Fragment
