@@ -1,6 +1,5 @@
 package ru.yandex.practicum.moviessearch.data.network
 
-import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
 import ru.yandex.practicum.moviessearch.data.dto.MovieCastResponse
@@ -15,14 +14,14 @@ interface IMDbApiService {
     }
 
     @GET("/en/API/SearchName/$IMDB_KEY/{expression}")
-    fun searchNames(@Path("expression") expression: String): Call<NamesSearchResponse>
+    suspend fun searchNames(@Path("expression") expression: String): NamesSearchResponse
 
     @GET("/en/API/SearchMovie/$IMDB_KEY/{expression}")
-    fun searchMovies(@Path("expression") expression: String): Call<MoviesSearchResponse>
+    suspend fun searchMovies(@Path("expression") expression: String): MoviesSearchResponse
 
     @GET("/en/API/Title/$IMDB_KEY/{movie_id}")
-    fun getMovieDetails(@Path("movie_id") movieId: String): Call<MovieDetailsResponse>
+    suspend fun getMovieDetails(@Path("movie_id") movieId: String): MovieDetailsResponse
 
     @GET("/en/API/FullCast/$IMDB_KEY/{movie_id}")
-    fun getFullCast(@Path("movie_id") movieId: String): Call<MovieCastResponse>
+    suspend fun getFullCast(@Path("movie_id") movieId: String): MovieCastResponse
 }

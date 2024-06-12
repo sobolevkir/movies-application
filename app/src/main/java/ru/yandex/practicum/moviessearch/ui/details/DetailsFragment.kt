@@ -19,14 +19,20 @@ class DetailsFragment : Fragment() {
         private const val ARGS_POSTER_URL = "poster_url"
 
         fun createArgs(movieId: String, posterUrl: String): Bundle =
-            bundleOf(ARGS_MOVIE_ID to movieId,
-                ARGS_POSTER_URL to posterUrl)
+            bundleOf(
+                ARGS_MOVIE_ID to movieId,
+                ARGS_POSTER_URL to posterUrl
+            )
     }
 
     private lateinit var binding: FragmentDetailsBinding
     private lateinit var tabsMediator: TabLayoutMediator
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         binding = FragmentDetailsBinding.inflate(inflater, container, false)
         return binding.root
     }

@@ -1,4 +1,4 @@
-package ru.yandex.practicum.moviessearch.di
+package ru.yandex.practicum.moviessearch.core.navigation_old
 
 import org.koin.dsl.module
 import ru.yandex.practicum.moviessearch.core.navigation_old.Router
